@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as Path;
 import 'alldata.dart';
+import 'getdata.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,6 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
   //         (value) => imageLink == value,
   //       );
   // }
+
+  DocumentSnapshot data;
 
   Future uploadImageToFirebase(BuildContext context) async {
     String fileName = userImage.path;
@@ -185,6 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       .doc('text')
                       .get();
                   print(variable['photo']);
+                  data = variable;
                 },
                 child: Text('get data'),
               ),
@@ -199,6 +203,18 @@ class _MyHomePageState extends State<MyHomePage> {
                           builder: (BuildContext context) => alldata()));
                 },
                 child: Text('ALL data'),
+              ),
+            ),
+            Builder(
+              builder: (context) => Column(
+                children: [
+                  Text(data['email']),
+                  Text(data['password']),
+                  Container(
+                      child: Image(
+                    image: NetworkImage(data['photo']),
+                  ))
+                ],
               ),
             ),
           ],

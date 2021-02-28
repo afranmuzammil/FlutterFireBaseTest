@@ -11,8 +11,6 @@ class alldata extends StatefulWidget {
 
 // ignore: camel_case_types
 class _alldataState extends State<alldata> {
-  // DocumentReference users =
-  //     FirebaseFirestore.instance.collection('users').doc('ABC123');
   @override
   Widget build(BuildContext context) {
     // Stream documentStream =
@@ -21,7 +19,7 @@ class _alldataState extends State<alldata> {
       appBar: AppBar(
         title: Text('All Data'),
       ),
-      body: StreamBuilder<QuerySnapshot>(
+      body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('test').snapshots(),
         //stream: documentStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
